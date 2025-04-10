@@ -68,7 +68,7 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-700 mb-6 h-12 flex items-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-700 mb-6 flex items-center">
               <span className="mr-2">I'm a</span>
               <span className="typing bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent">{typingText}</span>
               <span className="animate-pulse text-purple-600">|</span>
@@ -146,7 +146,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
           <a href="#about" className="text-blue-500 hover:text-indigo-600 transition-colors">
             <div className="p-2 rounded-full bg-white/50 backdrop-blur-sm shadow-md">
               <ArrowDown size={32} />
