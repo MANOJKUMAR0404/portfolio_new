@@ -37,7 +37,7 @@ const Experience = () => {
       title: "Verilog Programmer",
       company: "SMART DV",
       location: "Bangalore, Karnataka",
-      period: "Aug 2023 - Jan 2024",
+      period: "Sept 2023 - Jan 2024",
       description: "Gained expertise in V-by-One specification, applying it to data transmission, alongside hands-on experience in Verilog coding for displays with diverse resolutions and byte modes, demonstrating adaptability in visual requirements."
     }
   ];
