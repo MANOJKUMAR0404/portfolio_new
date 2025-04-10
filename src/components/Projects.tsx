@@ -29,12 +29,21 @@ const Projects = () => {
 
   const projects = [
     {
+      title: "Weather App",
+      description: "This is a simple Weather App that allows users to check current weather conditions and a 24-hour forecast for any city. It leverages the WeatherAPI to fetch and display weather data based on user input or current location.",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80",
+      technologies: ["JavaScript", "API Integration", "HTML", "CSS"],
+      github: "https://manojkumar0404.github.io/Weather-app/",
+      // demo: "https://gemini-clone.example.com",
+      date: "August 2024"
+    },
+    {
       title: "Google Gemini Clone",
       description: "Gemini Clone is a web application that mimics a chat interface similar to Google's Gemini. It allows users to interact with a generative language model, view suggestions, and toggle between light and dark themes. The app fetches responses from a generative language API and displays them with a typing effect.",
       image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80",
       technologies: ["JavaScript", "React", "API Integration", "CSS"],
-      github: "https://github.com/manojkumar/gemini-clone",
-      demo: "https://gemini-clone.example.com",
+      github: "https://github.com/MANOJKUMAR0404/GOOGLE-GEMINI",
+      // demo: "https://gemini-clone.example.com",
       date: "August 2024"
     },
     {
@@ -42,8 +51,8 @@ const Projects = () => {
       description: "TrueVote is a simple Django polling application, following the official Django documentation tutorial. TrueVote allows users to view and vote on polls created by administrators. It includes functionality to display recent polls, view poll details, vote on choices, and see poll results.",
       image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600&q=80",
       technologies: ["Python", "Django", "HTML", "CSS"],
-      github: "https://github.com/manojkumar/polls-app",
-      demo: "https://polls.example.com",
+      github: "https://github.com/MANOJKUMAR0404/Polls_django",
+      // demo: "https://polls.example.com",
       date: "June 2024"
     },
     {
@@ -51,8 +60,8 @@ const Projects = () => {
       description: "Developed Edusphere, an e-learning website using React, Django, and Bootstrap. Demonstrated expertise in creating intuitive interfaces, integrating backend functionalities, and ensuring a smooth user experience. Highlights proficiency in leveraging modern technologies for impactful online education solutions.",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80",
       technologies: ["React", "Django", "Bootstrap", "PostgreSQL"],
-      github: "https://github.com/manojkumar/edusphere",
-      demo: "https://edusphere.example.com",
+      github: "https://github.com/MANOJKUMAR0404/Edusphere",
+      // demo: "https://edusphere.example.com",
       date: "Mar 2024"
     }
   ];
@@ -108,14 +117,14 @@ const Projects = () => {
                   >
                     <Github className="h-4 w-4 mr-1" /> Code
                   </a>
-                  <a
+                  {/* <a
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-700 hover:text-theme-blue flex items-center transform hover:translate-x-1 transition-transform"
                   >
                     <ExternalLink className="h-4 w-4 mr-1" /> Live Demo
-                  </a>
+                  </a> */}
                 </CardFooter>
               </Card>
             </div>

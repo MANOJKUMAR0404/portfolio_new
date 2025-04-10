@@ -31,9 +31,9 @@ const Header = () => {
   ];
 
   const socialLinks = [
-    { name: 'GitHub', href: 'https://github.com/manojkumar', icon: <Github className="h-5 w-5" /> },
-    { name: 'LinkedIn', href: 'https://linkedin.com/in/manojkumar', icon: <Linkedin className="h-5 w-5" /> },
-    { name: 'Email', href: 'mailto:manojkumaroprofessional.com', icon: <Mail className="h-5 w-5" /> },
+    { name: 'GitHub', href: 'https://github.com/MANOJKUMAR0404', icon: <Github className="h-5 w-5" /> },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/manojkumar-rajendran-909057185', icon: <Linkedin className="h-5 w-5" /> },
+    { name: 'Email', href: 'mailto:manojkumar0professional.com', icon: <Mail className="h-5 w-5" /> },
   ];
   
   return (

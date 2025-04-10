@@ -2,6 +2,8 @@
 import { ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
+import resume from '@/assets/Manojkumar_Resume.pdf'
+import logo from '@/assets/images/profile_picture.jpeg'
 
 const Hero = () => {
   const [typingText, setTypingText] = useState("");
@@ -55,7 +57,7 @@ const Hero = () => {
               <div className="flex items-center mb-8 relative z-10">
                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-white shadow-xl shadow-blue-200/50 float">
                   <img 
-                    src="/lovable-uploads/30764350-52b7-4dba-bc8e-13e3f5f93409.png" 
+                    src={logo} 
                     alt="Manojkumar Rajendran" 
                     className="w-full h-full object-cover"
                   />
@@ -82,7 +84,7 @@ const Hero = () => {
                 size="lg" 
                 className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
-                <a href="/Manojkumar_Rajendran_Resume.pdf" download className="flex items-center">
+                <a href={resume} download className="flex items-center">
                   Download Resume
                 </a>
               </Button>
@@ -113,17 +115,7 @@ const Hero = () => {
                 <ul className="space-y-3">
                   <li>
                     <a 
-                      href="https://portfolio.io/manojkumar" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="link-button flex items-center transform hover:translate-x-2 transition-transform text-blue-600 hover:text-indigo-600"
-                    >
-                      Portfolio
-                    </a>
-                  </li>
-                  <li>
-                    <a 
-                      href="https://github.com/manojkumar" 
+                      href="https://github.com/MANOJKUMAR0404" 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="link-button flex items-center transform hover:translate-x-2 transition-transform text-blue-600 hover:text-indigo-600"
@@ -133,12 +125,22 @@ const Hero = () => {
                   </li>
                   <li>
                     <a 
-                      href="https://linkedin.com/in/manojkumar" 
+                      href="https://www.linkedin.com/in/manojkumar-rajendran-909057185" 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="link-button flex items-center transform hover:translate-x-2 transition-transform text-blue-600 hover:text-indigo-600"
                     >
                       LinkedIn
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://www.instagram.com/stu_developer/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="link-button flex items-center transform hover:translate-x-2 transition-transform text-blue-600 hover:text-indigo-600"
+                    >
+                      Instagram
                     </a>
                   </li>
                 </ul>

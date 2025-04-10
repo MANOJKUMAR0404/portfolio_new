@@ -30,7 +30,7 @@ const Skills = () => {
     {
       id: "languages",
       name: "Languages",
-      skills: ["Python", "JavaScript", "HTML", "CSS", "SQL", "Verilog"]
+      skills: ["Python", "JavaScript", "HTML", "CSS", "SQL", "Verilog","C", "C++"]
     },
     {
       id: "frameworks",

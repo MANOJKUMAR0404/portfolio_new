@@ -14,30 +14,54 @@ const Contact = () => {
     subject: '',
     message: ''
   });
-  
+  const [result, setResult] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    
-    // Show success toast
-    toast({
-      title: "Message Sent",
-      description: "Thanks for reaching out! I'll get back to you soon.",
-      variant: "default",
+    setResult('Sending...');
+
+    const data = new FormData();
+    data.append('access_key', '993bde57-6703-4d79-a6de-34ed1d8ce07c'); // Replace with your Web3Forms access key
+    data.append('name', formData.name);
+    data.append('email', formData.email);
+    data.append('subject', formData.subject);
+    data.append('message', formData.message);
+
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: data,
     });
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
+
+    const resultData = await response.json();
+
+    if (resultData.success) {
+      setResult('Form Submitted Successfully');
+      toast({
+        title: 'Message Sent',
+        description: 'Thanks for reaching out! I\'ll get back to you soon.',
+        variant: 'default',
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    } else {
+      setResult(resultData.message || 'Something went wrong');
+      toast({
+        title: 'Error',
+        description: resultData.message,
+        variant: 'destructive',
+      });
+    }
   };
 
   return (
@@ -58,10 +82,10 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-gray-700">Email</h4>
                     <a 
-                      href="mailto:manojkumaroprofessional.com" 
+                      href="mailto:manojkumar0professional.com" 
                       className="text-theme-blue hover:underline"
                     >
-                      manojkumaroprofessional.com
+                      manojkumar0professional.com
                     </a>
                   </div>
                 </div>
@@ -96,7 +120,7 @@ const Contact = () => {
                 <h4 className="font-semibold text-gray-700 mb-3">Connect with me on social media</h4>
                 <div className="flex space-x-4">
                   <a 
-                    href="https://github.com/manojkumar" 
+                    href="https://github.com/MANOJKUMAR0404/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="p-3 bg-gray-200 rounded-full text-gray-700 hover:bg-theme-blue hover:text-white transition-colors"
@@ -106,7 +130,7 @@ const Contact = () => {
                     </svg>
                   </a>
                   <a 
-                    href="https://linkedin.com/in/manojkumar" 
+                    href="https://www.linkedin.com/in/manojkumar-rajendran-909057185/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="p-3 bg-gray-200 rounded-full text-gray-700 hover:bg-theme-blue hover:text-white transition-colors"
@@ -125,7 +149,7 @@ const Contact = () => {
           <div className="animate-fade-in opacity-0" style={{ animationDelay: '0.4s' }}>
             <form onSubmit={handleSubmit} className="glass-card p-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">Send Me a Message</h3>
-              
+
               <div className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
@@ -138,7 +162,7 @@ const Contact = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                   <Input
@@ -151,7 +175,7 @@ const Contact = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
                   <Input
@@ -163,7 +187,7 @@ const Contact = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
                   <Textarea
@@ -176,11 +200,13 @@ const Contact = () => {
                     required
                   />
                 </div>
-                
+
                 <Button type="submit" className="w-full bg-theme-blue hover:bg-theme-indigo">
                   <Send className="h-4 w-4 mr-2" /> Send Message
                 </Button>
               </div>
+
+              {result && <p className="text-sm mt-4 text-gray-600">{result}</p>}
             </form>
           </div>
         </div>
