@@ -83,12 +83,22 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem; /* Add padding for fixed header */
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: 'Inter', sans-serif;
+  }
+
+  section {
+    @apply py-20 md:py-24 relative overflow-hidden;
   }
 
   .section-heading {
-    @apply text-3xl font-bold mb-6 text-theme-blue inline-block relative after:content-[''] after:absolute after:w-full after:h-1 after:bg-theme-blue after:bottom-0 after:left-0 after:rounded-full;
+    @apply text-3xl font-bold mb-8 text-theme-blue inline-block relative after:content-[''] after:absolute after:w-full after:h-1 after:bg-theme-blue after:bottom-0 after:left-0 after:rounded-full;
   }
 
   .card-project {
@@ -109,7 +119,7 @@
 }
 
 .timeline-item {
-  @apply relative pl-8 pb-8 border-l-2 border-blue-500 ml-4;
+  @apply relative pl-8 pb-12 border-l-2 border-blue-500 ml-4;
 }
 
 .timeline-item::before {
@@ -166,20 +176,8 @@
 /* Text animation for typewriter effect */
 .typing {
   overflow: hidden;
-  border-right: 2px solid #1E40AF;
   white-space: nowrap;
   margin: 0 auto;
-  animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: #1E40AF }
 }
 
 /* 3D card effect */
@@ -203,4 +201,20 @@
   0% { background-position: 0% 50% }
   50% { background-position: 100% 50% }
   100% { background-position: 0% 50% }
+}
+
+/* Improved spacing between sections */
+section + section {
+  margin-top: 2rem;
+}
+
+/* Ensure project cards have consistent heights */
+.project-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card .card-content {
+  flex: 1;
 }

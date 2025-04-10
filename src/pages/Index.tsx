@@ -11,7 +11,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 const Index = () => {
-  // Function to handle scroll animations
+  // Function to handle scroll animations with improved performance
   useEffect(() => {
     const handleScroll = () => {
       const reveals = document.querySelectorAll('.reveal');
@@ -27,7 +27,8 @@ const Index = () => {
       });
     };
     
-    window.addEventListener('scroll', handleScroll);
+    // Use passive event listener for better scrolling performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Call once on mount
     
     return () => {
@@ -36,15 +37,17 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <Header />
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
-      <Skills />
-      <Education />
-      <Contact />
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Education />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );
