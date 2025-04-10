@@ -2,8 +2,31 @@
 import { Github, ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { useEffect, useRef } from 'react';
 
 const Projects = () => {
+  const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    projectRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      projectRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
+
   const projects = [
     {
       title: "Google Gemini Clone",
@@ -41,55 +64,61 @@ const Projects = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
           {projects.map((project, index) => (
-            <Card 
-              key={index} 
-              className="overflow-hidden transition-all duration-300 hover:shadow-lg animate-fade-in opacity-0"
-              style={{ animationDelay: `${0.2 + index * 0.2}s` }}
+            <div
+              key={index}
+              ref={(el) => (projectRefs.current[index] = el)}
+              className="reveal"
             >
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
-              </div>
-              <CardHeader>
-                <div className="flex justify-between items-start">
-                  <CardTitle className="text-xl font-bold">{project.title}</CardTitle>
-                  <Badge variant="outline" className="text-xs bg-blue-50">{project.date}</Badge>
+              <Card className="overflow-hidden transition-all duration-500 hover:shadow-xl h-full transform hover:scale-105 group">
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
                 </div>
-                <CardDescription className="line-clamp-2 mt-1">
-                  {project.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {project.technologies.map((tech, i) => (
-                    <Badge key={i} variant="secondary" className="bg-gray-100 text-gray-800">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter className="flex justify-between">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-theme-blue flex items-center"
-                >
-                  <Github className="h-4 w-4 mr-1" /> Code
-                </a>
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-theme-blue flex items-center"
-                >
-                  <ExternalLink className="h-4 w-4 mr-1" /> Live Demo
-                </a>
-              </CardFooter>
-            </Card>
+                <CardHeader>
+                  <div className="flex justify-between items-start">
+                    <CardTitle className="text-xl font-bold">{project.title}</CardTitle>
+                    <Badge variant="outline" className="text-xs bg-blue-50">{project.date}</Badge>
+                  </div>
+                  <CardDescription className="line-clamp-2 mt-1">
+                    {project.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {project.technologies.map((tech, i) => (
+                      <Badge 
+                        key={i} 
+                        variant="secondary" 
+                        className="bg-gray-100 text-gray-800 transition-all duration-300 hover:bg-theme-blue hover:text-white"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-700 hover:text-theme-blue flex items-center transform hover:translate-x-1 transition-transform"
+                  >
+                    <Github className="h-4 w-4 mr-1" /> Code
+                  </a>
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-700 hover:text-theme-blue flex items-center transform hover:translate-x-1 transition-transform"
+                  >
+                    <ExternalLink className="h-4 w-4 mr-1" /> Live Demo
+                  </a>
+                </CardFooter>
+              </Card>
+            </div>
           ))}
         </div>
       </div>

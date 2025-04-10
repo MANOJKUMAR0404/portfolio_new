@@ -1,16 +1,51 @@
 
 import { ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useEffect, useState } from 'react';
 
 const Hero = () => {
+  const [typingText, setTypingText] = useState("");
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const phrases = ["Full Stack Developer", "Python Expert", "React Developer", "Django Specialist"];
+  const typingSpeed = 150;
+  const deletingSpeed = 100;
+  const pauseTime = 1500;
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const currentPhrase = phrases[currentPhraseIndex];
+      
+      if (!isDeleting) {
+        setTypingText(currentPhrase.substring(0, typingText.length + 1));
+        
+        if (typingText === currentPhrase) {
+          setIsDeleting(true);
+          clearTimeout(timeout);
+          setTimeout(() => {
+            setIsDeleting(true);
+          }, pauseTime);
+        }
+      } else {
+        setTypingText(currentPhrase.substring(0, typingText.length - 1));
+        
+        if (typingText === '') {
+          setIsDeleting(false);
+          setCurrentPhraseIndex((currentPhraseIndex + 1) % phrases.length);
+        }
+      }
+    }, isDeleting ? deletingSpeed : typingSpeed);
+    
+    return () => clearTimeout(timeout);
+  }, [typingText, isDeleting, currentPhraseIndex, phrases]);
+
   return (
-    <section id="home" className="min-h-screen flex items-center relative pt-16">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 -z-10"></div>
+    <section id="home" className="min-h-screen flex items-center relative pt-16 animated-bg">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 animate-fade-in [animation-delay:0.2s] opacity-0">
             <div className="flex items-center mb-6">
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
+              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-white shadow-lg float">
                 <img 
                   src="/lovable-uploads/30764350-52b7-4dba-bc8e-13e3f5f93409.png" 
                   alt="Manojkumar Rajendran" 
@@ -20,24 +55,31 @@ const Hero = () => {
               <div className="ml-6">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
                   Manojkumar
-                  <span className="block text-theme-blue">Rajendran</span>
+                  <span className="block text-theme-blue animated-gradient">Rajendran</span>
                 </h1>
               </div>
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-700 mb-4">
-              Full Stack Developer
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-700 mb-4 h-10">
+              <span className="typing">{typingText}</span>
             </h2>
             <p className="text-lg text-gray-600 mb-8 max-w-2xl">
               Passionate about building impactful web applications with Django and React. 
               From concept to deployment, I bring ideas to life with clean code and user-focused design.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-theme-blue hover:bg-theme-indigo transition-colors">
+              <Button 
+                size="lg" 
+                className="bg-theme-blue hover:bg-theme-indigo transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
                 <a href="/Manojkumar_Rajendran_Resume.pdf" download className="flex items-center">
                   Download Resume
                 </a>
               </Button>
-              <Button variant="outline" size="lg">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all"
+              >
                 <a href="#contact" className="flex items-center">
                   Contact Me
                 </a>
@@ -45,7 +87,7 @@ const Hero = () => {
             </div>
           </div>
           <div className="md:w-1/2 mt-12 md:mt-0 animate-fade-in [animation-delay:0.5s] opacity-0">
-            <div className="glass-card p-8 relative">
+            <div className="glass-card p-8 relative card-3d shadow-2xl">
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Contact Information</h3>
                 <p className="text-gray-600">Namakkal, Tamilnadu</p>
@@ -56,17 +98,32 @@ const Hero = () => {
                 <h3 className="text-xl font-bold text-gray-800 mb-2">Professional Links</h3>
                 <ul className="space-y-2">
                   <li>
-                    <a href="https://portfolio.io/manojkumar" target="_blank" rel="noopener noreferrer" className="link-button flex items-center">
+                    <a 
+                      href="https://portfolio.io/manojkumar" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="link-button flex items-center transform hover:translate-x-2 transition-transform"
+                    >
                       Portfolio
                     </a>
                   </li>
                   <li>
-                    <a href="https://github.com/manojkumar" target="_blank" rel="noopener noreferrer" className="link-button flex items-center">
+                    <a 
+                      href="https://github.com/manojkumar" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="link-button flex items-center transform hover:translate-x-2 transition-transform"
+                    >
                       GitHub
                     </a>
                   </li>
                   <li>
-                    <a href="https://linkedin.com/in/manojkumar" target="_blank" rel="noopener noreferrer" className="link-button flex items-center">
+                    <a 
+                      href="https://linkedin.com/in/manojkumar" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="link-button flex items-center transform hover:translate-x-2 transition-transform"
+                    >
                       LinkedIn
                     </a>
                   </li>
